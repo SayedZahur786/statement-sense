@@ -1,6 +1,6 @@
 import { boundedBody } from "@/lib/body";
 import { NextResponse } from "next/server";
-import { PDFParse } from "pdf-parse";
+import type { PDFParse } from "pdf-parse";
 import { parseStatement, type Bank } from "@/lib/statement";
 import { rateLimit, metric, sameOrigin } from "@/lib/db";
 export const runtime = "nodejs";
@@ -42,6 +42,7 @@ export async function POST(request: Request) {
     const bytes = new Uint8Array(await file.arrayBuffer());
     if (new TextDecoder().decode(bytes.slice(0, 5)) !== "%PDF-")
       return fail("This file is not a PDF.", 400);
+    const { PDFParse } = await import("pdf-parse");
     parser = new PDFParse({ data: bytes });
     const info = await parser.getInfo();
     if (info.total > 30)

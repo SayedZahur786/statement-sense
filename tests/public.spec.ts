@@ -1,2 +1,34 @@
-import {test,expect} from '@playwright/test';
-test('public demo-only deployment is explicit and usable',async({page,request,baseURL})=>{const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('/');await expect(page.getByText('Private uploads are not enabled on this deployment yet.',{exact:false})).toBeVisible();await expect(page.getByRole('button',{name:'Choose a PDF'})).toHaveCount(0);await page.goto('/demo');await expect(page.getByText('The numbers add up.')).toBeVisible();await page.getByRole('button',{name:'Review charges'}).click();await expect(page.getByRole('heading',{name:'NETFLIX',exact:true})).toBeVisible();await page.goto('/history');await expect(page.getByText('Interest-list signup isn’t enabled yet.')).toBeVisible();const r=await request.post('/api/parse',{headers:{origin:baseURL!},data:'not a document'});expect(r.status()).toBe(503);expect(errors).toEqual([]);});
+import { test, expect } from "@playwright/test";
+test("public demo-only deployment is explicit and usable", async ({
+  page,
+  request,
+  baseURL,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.goto("/");
+  await expect(
+    page.getByText("Private uploads are not enabled on this deployment yet.", {
+      exact: false,
+    }),
+  ).toBeVisible();
+  await expect(page.getByRole("button", { name: "Choose a PDF" })).toHaveCount(
+    0,
+  );
+  await page.goto("/demo");
+  await expect(page.getByText("The numbers add up.")).toBeVisible();
+  await page.getByRole("button", { name: "Review charges" }).click();
+  await expect(
+    page.getByRole("heading", { name: "NETFLIX", exact: true }),
+  ).toBeVisible();
+  await page.goto("/history");
+  await expect(
+    page.getByText("Interest-list signup isn’t enabled yet."),
+  ).toBeVisible();
+  const r = await request.post("/api/parse", {
+    headers: { origin: baseURL! },
+    data: "not a document",
+  });
+  expect(r.status()).toBe(503);
+  expect(errors).toEqual([]);
+});
