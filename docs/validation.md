@@ -21,7 +21,7 @@
 
 ## Hosted scope
 
-The Vercel production build succeeded. The public site is intentionally demo-only until transfer of app-specific credentials is explicitly authorized. A first hosted API probe exposed missing canvas packaging; the code now traces that runtime dependency and imports the parser only after availability/rate checks. Final hosted verification is recorded below when completed. No claim of hosted private-upload success is made without a real end-to-end test.
+The Vercel production build succeeded. The public site is intentionally demo-only until transfer of app-specific credentials is explicitly authorized. A first hosted API probe exposed missing canvas packaging; the code now traces that runtime dependency and imports the parser only after availability/rate checks. Final hosted checks PASS: HTTPS headers including HSTS; substantive policy pages; public demo interactions; unavailable upload/signup controls; and HTTP 503 from the unconfigured upload API. Canonical origin is https://statement-sense-seven.vercel.app. No claim of hosted private-upload success is made without a real end-to-end test.
 
 ## Not established
 
