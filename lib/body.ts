@@ -1,1 +1,30 @@
-export async function boundedBody(request:Request,maximum:number):Promise<Uint8Array>{const reader=request.body?.getReader();if(!reader)throw new Error('Missing body');const chunks:Uint8Array[]=[];let length=0;try{for(;;){const {done,value}=await reader.read();if(done)break;length+=value.byteLength;if(length>maximum){await reader.cancel();throw new Error('Body too large');}chunks.push(value);}}finally{reader.releaseLock();}const data=new Uint8Array(length);let offset=0;for(const chunk of chunks){data.set(chunk,offset);offset+=chunk.length;}return data;}
+export async function boundedBody(
+  request: Request,
+  maximum: number,
+): Promise<Uint8Array> {
+  const reader = request.body?.getReader();
+  if (!reader) throw new Error("Missing body");
+  const chunks: Uint8Array[] = [];
+  let length = 0;
+  try {
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      length += value.byteLength;
+      if (length > maximum) {
+        await reader.cancel();
+        throw new Error("Body too large");
+      }
+      chunks.push(value);
+    }
+  } finally {
+    reader.releaseLock();
+  }
+  const data = new Uint8Array(length);
+  let offset = 0;
+  for (const chunk of chunks) {
+    data.set(chunk, offset);
+    offset += chunk.length;
+  }
+  return data;
+}

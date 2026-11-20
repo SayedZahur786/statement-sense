@@ -1,1 +1,7 @@
-import type {MetadataRoute} from 'next';export default function sitemap():MetadataRoute.Sitemap{return ['/','/demo','/history','/privacy','/terms'].map(path=>({url:`${process.env.NEXT_PUBLIC_SITE_URL||'http://localhost:3000'}${path}`,lastModified:new Date('2026-11-21')}));}
+import type { MetadataRoute } from "next";
+export default function sitemap(): MetadataRoute.Sitemap {
+  return ["/", "/demo", "/history", "/privacy", "/terms"].map((path) => ({
+    url: `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}${path}`,
+    lastModified: new Date("2026-11-21"),
+  }));
+}

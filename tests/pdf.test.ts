@@ -1,2 +1,21 @@
-import {test} from 'node:test';import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';import {PDFParse} from 'pdf-parse';import {parseStatement} from '../lib/statement';
-for(const bank of ['HDFC','ICICI','SBI'] as const)test(`${bank} actual PDF extraction`,async()=>{const parser=new PDFParse({data:new Uint8Array(await readFile(`public/samples/${bank.toLowerCase()}-synthetic.pdf`))});try{const text=await parser.getText();const result=parseStatement(text.text,bank);assert.equal(result.transactions.length,80);assert.equal(result.tieOut,'matched');}finally{await parser.destroy();}});
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import { PDFParse } from "pdf-parse";
+import { parseStatement } from "../lib/statement";
+for (const bank of ["HDFC", "ICICI", "SBI"] as const)
+  test(`${bank} actual PDF extraction`, async () => {
+    const parser = new PDFParse({
+      data: new Uint8Array(
+        await readFile(`public/samples/${bank.toLowerCase()}-synthetic.pdf`),
+      ),
+    });
+    try {
+      const text = await parser.getText();
+      const result = parseStatement(text.text, bank);
+      assert.equal(result.transactions.length, 80);
+      assert.equal(result.tieOut, "matched");
+    } finally {
+      await parser.destroy();
+    }
+  });

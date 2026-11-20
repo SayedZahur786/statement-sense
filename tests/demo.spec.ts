@@ -1,2 +1,50 @@
-import {test,expect} from '@playwright/test';import {mkdirSync,copyFileSync,readFileSync,writeFileSync} from 'node:fs';
-test('record walkthrough source',async({browser,baseURL})=>{test.setTimeout(120000);mkdirSync('tmp/video',{recursive:true});const durations=JSON.parse(readFileSync('tmp/voice/durations.json','utf8')) as number[];const context=await browser.newContext({viewport:{width:1440,height:1050},recordVideo:{dir:'tmp/video',size:{width:1440,height:1050}}});const page=await context.newPage();const epoch=Date.now();const starts:number[]=[];async function scene(index:number){starts.push((Date.now()-epoch)/1000);await page.waitForTimeout(durations[index]*1000+700);}await page.goto(baseURL!);await scene(0);await page.getByLabel('Upload statement PDF').setInputFiles('public/samples/hdfc-synthetic.pdf');await expect(page.getByText('The numbers add up.')).toBeVisible({timeout:15000});await scene(1);await page.locator('.stats-grid').scrollIntoViewIfNeeded();await scene(2);await page.getByRole('button',{name:'Review charges'}).click();await scene(3);await page.getByRole('button',{name:/Transactions 80/}).click();await page.getByLabel('Search merchants').fill('SWIGGY');await scene(4);await page.getByRole('button',{name:'Overview',exact:true}).click();await page.evaluate(()=>window.scrollTo(0,0));await scene(5);const video=page.video()!;await context.close();copyFileSync(await video.path(),'tmp/video/walkthrough.webm');writeFileSync('tmp/video/timing.json',JSON.stringify({starts,durations,total:starts.at(-1)!+durations.at(-1)!+0.7}));});
+import { test, expect } from "@playwright/test";
+import { mkdirSync, copyFileSync, readFileSync, writeFileSync } from "node:fs";
+test("record walkthrough source", async ({ browser, baseURL }) => {
+  test.setTimeout(120000);
+  mkdirSync("tmp/video", { recursive: true });
+  const durations = JSON.parse(
+    readFileSync("tmp/voice/durations.json", "utf8"),
+  ) as number[];
+  const context = await browser.newContext({
+    viewport: { width: 1440, height: 1050 },
+    recordVideo: { dir: "tmp/video", size: { width: 1440, height: 1050 } },
+  });
+  const page = await context.newPage();
+  const epoch = Date.now();
+  const starts: number[] = [];
+  async function scene(index: number) {
+    starts.push((Date.now() - epoch) / 1000);
+    await page.waitForTimeout(durations[index] * 1000 + 700);
+  }
+  await page.goto(baseURL!);
+  await scene(0);
+  await page
+    .getByLabel("Upload statement PDF")
+    .setInputFiles("public/samples/hdfc-synthetic.pdf");
+  await expect(page.getByText("The numbers add up.")).toBeVisible({
+    timeout: 15000,
+  });
+  await scene(1);
+  await page.locator(".stats-grid").scrollIntoViewIfNeeded();
+  await scene(2);
+  await page.getByRole("button", { name: "Review charges" }).click();
+  await scene(3);
+  await page.getByRole("button", { name: /Transactions 80/ }).click();
+  await page.getByLabel("Search merchants").fill("SWIGGY");
+  await scene(4);
+  await page.getByRole("button", { name: "Overview", exact: true }).click();
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await scene(5);
+  const video = page.video()!;
+  await context.close();
+  copyFileSync(await video.path(), "tmp/video/walkthrough.webm");
+  writeFileSync(
+    "tmp/video/timing.json",
+    JSON.stringify({
+      starts,
+      durations,
+      total: starts.at(-1)! + durations.at(-1)! + 0.7,
+    }),
+  );
+});
