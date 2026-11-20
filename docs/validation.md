@@ -4,10 +4,11 @@
 
 - Frozen npm ci completed. npm audit: zero vulnerabilities across production and development dependencies at the final dependency installation.
 - Strict TypeScript build and ESLint pass.
-- 18 unit/integration tests: real PDF text extraction for three synthetic bank fixtures; card/account formats, integer amounts, impossible dates, unknown rows, missing totals, debit/credit mismatches, transfers, recurring candidates and body-byte caps.
+- 20 unit/integration tests: real PDF text extraction for three synthetic bank fixtures; card/account formats, integer amounts, impossible dates, unknown rows, missing totals, debit/credit mismatches, transfers, recurring candidates and body-byte caps.
 - Four Playwright checks: upload → summary → recurring candidate → search/category correction; all main routes on mobile and actual 404; upload/origin/cleanup denial; interest insertion and deletion by removal capability.
 - Dedicated Neon production project migration applied. Runtime role lacks superuser, role-creation and database-creation permission. Fifteen concurrent rate-counter writes produced exactly 15 increments. Test signup rows were removed.
 - Fourteen real desktop/mobile PNGs saved in docs/screenshots. The local configured app, not the unconfigured hosted demo, is shown.
+- GitHub README banner animation verified in Chromium: screenshots 1.6 seconds apart differ; image loads and Demo video section renders.
 - Narrated real-browser video: 51.4 seconds, H.264 video + AAC audio, large burned-in captions. Six voice segments align to recorded stage timings. Local synthetic HDFC fixture used.
 - Gitleaks scanned the tracked source snapshot and complete git history with no findings. Ignored environment credentials are expected locally and are excluded from deploy archives. No owner connection is sent to Vercel.
 
