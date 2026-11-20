@@ -1,4 +1,5 @@
 # Real browser walkthrough
+
 1. Hook: Your statement has the answers. Find where your money went.
 2. Show the calm empty review screen, with no bank linking required.
 3. Upload the clearly labelled synthetic HDFC PDF containing 80 transactions.

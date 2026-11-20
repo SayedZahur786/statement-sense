@@ -1,0 +1,31 @@
+# Privacy policy
+
+Effective date: 21 November 2026
+
+## Who operates this service
+
+Statement Sense is operated by Sayed Zahur as an independent software project. Contact the operator through the contact options on https://github.com/SayedZahur786. Do not post statements, account numbers or removal codes publicly. This research preview is not a bank, payment provider or financial adviser.
+
+## Information and purpose
+
+When you choose a PDF, it is uploaded over HTTPS to the application server for extraction and deterministic categorisation. No statement contents are sent to an AI model. The application reads bank labels, transaction dates, descriptions, amounts and summary totals. Account-like number sequences and UPI identifiers in returned descriptions are masked on a best-effort basis; this is not a guarantee that every identifying name is removed. Never upload a document you are not authorised to process. The report is returned to your browser memory. If you join the history interest list, we store your email, signup time and a hashed removal code to handle that request. Aggregate daily counts measure non-demo parses, matched tie-outs and new interest signups. They contain no statement contents or user identifiers.
+
+## Cookies and analytics
+
+The application does not set an account or advertising cookie. The shared analytics component is installed but disabled; no page-view analytics receiver is enabled. Active report data exists only in this tab’s memory, not local storage. Infrastructure providers may process operational request metadata such as IP addresses and timestamps. We do not use behavioural advertising or sell your financial data.
+
+## Service providers and transfers
+
+Vercel hosts the application and processes uploaded PDFs transiently in server memory. Neon provides the dedicated Postgres database for interest signups, global rate limits and aggregate counts. Hosting and support may process data outside India; the database is configured in Singapore. No data-residency or regulatory certification is claimed. Provider operational logs and backups follow their own retention and security controls. The application does not intentionally log statement text, filenames, email addresses or report contents.
+
+## Retention and security
+
+Uploaded PDFs and parsed transaction rows are not written to the application database or file storage. The PDF parser is destroyed after each request and the browser report disappears on refresh or tab closure. Runtime memory reclamation is controlled by the hosting platform, so immediate secure erasure cannot be guaranteed. Interest signups expire after 90 days; a daily cleanup job removes expired rows. Global rate-limit entries expire after two minutes and are cleaned during requests. Aggregate daily counters contain no personal records and remain for product measurement. Access uses server-only credentials and parameterised database queries. No system can guarantee absolute security.
+
+## Your choices and rights
+
+Uploading is optional. Explore the synthetic demo without sharing a PDF. Clear an active report with New statement, by refreshing, or by closing the tab. To delete an interest signup, open History early access, expand Remove an interest-list signup and submit your saved removal code. Anyone holding that code can remove the matching signup; keep it private. If you lose it, contact the operator through the profile above without publishing private financial information. We will need to verify your control of the email before acting. Requests for access, correction, deletion or concerns can use the same contact route. Do not send children’s documents; the service is intended for adults.
+
+## Changes
+
+Changes to processing or providers will be reflected here with a revised effective date. Material new uses will require an updated disclosure before activation. Check this page before future uploads.

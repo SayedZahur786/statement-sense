@@ -1,0 +1,6 @@
+Where did your money go? Statement Sense turns a bank statement into a clearer monthly picture. No bank login is needed.
+Upload a PDF and choose the bank. This walkthrough uses eighty invented transactions, clearly labelled as a synthetic demo.
+See spending by category and your largest merchants. Transfers are kept separate. The tie-out compares parsed debits and credits with the statement totals.
+Review subscription candidates, including Netflix and Spotify. These are suggestions to check, not proof of an active subscription.
+Search every transaction and correct its category. Your edits last for this session.
+The PDF is not saved, and no statement text is sent to an AI model. Close the tab to clear your report. Statement Sense. Less spreadsheet. More perspective.
