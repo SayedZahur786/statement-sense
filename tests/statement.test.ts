@@ -94,3 +94,14 @@ test("monthly repeated merchant is a candidate; same-day duplicates are not", ()
     0,
   );
 });
+test("latest recurring charge follows the date, not PDF row order", () => {
+  const s = parseStatement(
+    "HDFC BANK CREDIT CARD\n01/10/2026 GYM 1000.00 DR\n01/09/2026 GYM 980.00 DR",
+    "HDFC",
+  );
+  assert.equal(recurring(s.transactions)[0].amount, 100000);
+});
+test("amount bound keeps 2000-row integer sums exact", () => {
+  assert.throws(() => paise("99999999999.99"));
+  assert.ok(Number.isSafeInteger(paise("9999999999.99") * 2000));
+});

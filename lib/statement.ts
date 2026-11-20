@@ -40,7 +40,7 @@ export const money = (paise: number) =>
   }).format(paise / 100);
 export function paise(value: string): number {
   const cleaned = value.replace(/,/g, "");
-  if (!/^\d{1,12}\.\d{2}$/.test(cleaned)) throw new Error("Invalid amount");
+  if (!/^\d{1,10}\.\d{2}$/.test(cleaned)) throw new Error("Invalid amount");
   const [whole, fraction] = cleaned.split(".");
   return Number(whole) * 100 + Number(fraction);
 }
@@ -287,7 +287,8 @@ export function recurring(transactions: Transaction[]) {
     return [
       {
         merchant: rows[0].merchant,
-        amount: rows.at(-1)!.amount,
+        amount: [...rows].sort((a, b) => a.date.localeCompare(b.date)).at(-1)!
+          .amount,
         count: rows.length,
         reason:
           periodic && similar
